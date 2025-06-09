@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head><title>New Listing</title></head>
+<body>
+<h1>Post New Item</h1>
+<form id="postForm">
+    <input placeholder="Title" name="name" required><br>
+    <input placeholder="Price" name="price" type="number" required><br>
+    <input placeholder="Photo URL" name="photoUrl"><br>
+    <textarea name="description" placeholder="Description" required></textarea><br>
+    <button type="submit">Submit</button>
+</form>
+<script>
+    document.getElementById("postForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(this).entries());
+      await fetch("/market", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+      alert("Listing posted!");
+      location.href = "/index.html";
+    });
+</script>
+</body>
+</html>
