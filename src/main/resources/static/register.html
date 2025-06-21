@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+</head>
+<body>
+<h1>Register</h1>
+<form id="registerForm">
+    <input name="username" placeholder="Username" required><br>
+    <input name="email" placeholder="Email" type="email" required><br>
+    <input name="dateOfBirth" placeholder="Date of Birth (YYYY-MM-DD)" required><br>
+    <input name="password" placeholder="Password" type="password" required><br>
+    <input name="confirmPassword" placeholder="Confirm Password" type="password" required><br>
+    <button type="submit">Register</button>
+</form>
+
+<script>
+    document.getElementById("registerForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(e.target).entries());
+
+      const res = await fetch("/users/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+
+      if (res.ok) {
+        alert("Registration successful!");
+        window.location.href = "/login.html";
+      } else {
+        alert("Registration failed.");
+      }
+    });
+</script>
+</body>
+</html>

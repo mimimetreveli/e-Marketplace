@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
-<head><title>New Listing</title></head>
+<head>
+    <title>New Listing</title>
+</head>
 <body>
 <h1>Post New Item</h1>
 <form id="postForm">
@@ -10,17 +12,34 @@
     <textarea name="description" placeholder="Description" required></textarea><br>
     <button type="submit">Submit</button>
 </form>
+
 <script>
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      alert("You must be logged in to post.");
+      window.location.href = "/login.html";
+    }
+
     document.getElementById("postForm").addEventListener("submit", async function (e) {
       e.preventDefault();
       const data = Object.fromEntries(new FormData(this).entries());
-      await fetch("/market", {
+
+      const res = await fetch("/market", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "token": token
+        },
         body: JSON.stringify(data)
       });
-      alert("Listing posted!");
-      location.href = "/index.html";
+
+      if (res.ok) {
+        alert("Listing posted!");
+        location.href = "/index.html";
+      } else {
+        alert("Failed to post listing.");
+      }
     });
 </script>
 </body>

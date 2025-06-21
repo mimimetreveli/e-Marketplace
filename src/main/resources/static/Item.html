@@ -4,20 +4,28 @@
 <body>
 <h1>Listing Info</h1>
 <div id="details"></div>
+
 <script>
     const id = new URLSearchParams(window.location.search).get("id");
+    const d = document.getElementById("details");
+
     fetch(`/market/${id}`)
       .then(res => res.json())
       .then(item => {
-        const d = document.getElementById("details");
         d.innerHTML = `
           <h2>${item.name}</h2>
-          <img src="${item.photoUrl}" width="150"/><br>
+          <a href="item.html?id=${item.id}">
+            <img src="${item.photoUrl}" width="150" />
+          </a>
           <p>${item.description}</p>
           <p>Price: $${item.price}</p>
           <p>Posted: ${item.submissionTime}</p>
         `;
+      })
+      .catch(() => {
+        d.innerHTML = "<p>Item not found.</p>";
       });
 </script>
+
 </body>
 </html>
