@@ -21,6 +21,14 @@ public class Market {
     private String description;
     private LocalDateTime submissionTime;
     private String photoUrl;
+
+    public Market(long l, String test, double v, String testDesc, LocalDateTime now, String image) {
+    }
+
+    public Market() {
+
+    }
+
     public Long getId() {
         return id;
     }
