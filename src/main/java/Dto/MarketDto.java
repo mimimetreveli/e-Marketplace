@@ -6,6 +6,9 @@ public class MarketDto {
     private String description;
     private String photoUrl;
 
+    public MarketDto(String item, double v, String descprition, String image) {
+    }
+
     public String getName() {
         return name;
     }

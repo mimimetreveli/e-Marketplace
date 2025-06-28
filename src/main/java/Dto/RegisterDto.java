@@ -8,6 +8,14 @@ public class RegisterDto {
     public String password;
     public String confirmPassword;
     public LocalDate dateOfBirth;
+
+    public RegisterDto(String user, String mail, String password, String password1, LocalDate now) {
+    }
+
+    public RegisterDto() {
+
+    }
+
     public String getUsername() {
         return username;
     }

@@ -60,6 +60,6 @@ public class UserService {
     }
 
     public User findByUsername(String username) {
-        return repo.findByUsername(username).orElseThrow();
+        return UserRepository.findByUsername(username).orElseThrow();
     }
 }
